@@ -1,6 +1,6 @@
 import './App.css';
 import Weather from './components/Weather';
-import { hashRouter , Routes, Route } from 'react-router-dom';
+import { Routes, BrowserRouter as HashRouter, Route } from 'react-router-dom';
 import Favorites from './components/Favorites';
 import Title from './components/Title';
 function App() {
@@ -13,7 +13,7 @@ function App() {
   ];
   return (
     <div className="App">
-      <hashRouter>
+      <HashRouter>
         <Title />
         <Routes>
           <Route
@@ -25,7 +25,7 @@ function App() {
             element={<Favorites favoList={user1.favoritesCity} />}
           />
         </Routes>
-      </hashRouter>
+      </HashRouter>
     </div>
   );
 }

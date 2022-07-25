@@ -1,10 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export default function Weather(props) {
   const [searchedCity, setSearchedCity] = useState('');
   const cityToSearch = useRef();
-  const navigation = useNavigate();
 
   const searchCity = () => {
     if (cityToSearch.current.value === '') {
