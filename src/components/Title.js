@@ -1,9 +1,10 @@
 import React from 'react';
+import './Title.css'
 import { Link } from 'react-router-dom';
 
 export default function Title() {
   return (
-    <div>
+    <div className='headline-title'>
       <Link to={'/'}>
         <button>Home</button>
       </Link>

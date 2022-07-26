@@ -1,13 +1,14 @@
 import React from 'react';
+import './Favorites.css'
 
 export default function Favorites(props) {
   return (
-    <div>
+    <div className='favorite-page'>
       {props.favoList.map((c, i) => {
         return (
           <div key={i} className="favorite-city">
-            <p>City name: {c.name}</p>
-            <p>Temp: {c.temp}</p>
+            <p>{c.name}</p>
+            <p>{c.temp}</p>
           </div>
         );
       })}

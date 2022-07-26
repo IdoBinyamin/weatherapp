@@ -1,34 +1,30 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
+import './Weather.css';
 
 export default function Weather(props) {
-  const [searchedCity, setSearchedCity] = useState('');
-  const cityToSearch = useRef();
-
-  const searchCity = () => {
-    if (cityToSearch.current.value === '') {
-      alert('No city to search');
-      return;
-    }
-    for (let i = 0; i < props.cityList.length; i++) {
-      console.log(props.cityList[i]);
-      if (
-        props.cityList[i].name
-          .toLowerCase()
-          .includes(cityToSearch.current.value.toLowerCase())
-      ) {
-        setSearchedCity(props.cityList[i]);
-        break;
-      }
-    }
-  };
   return (
-    <div>
-      <input ref={cityToSearch} type={'search'} placeholder="Enter city name" />
+    <div className="main-page">
+      <div id="search-panel">
+        <input
+          id="search-line"
+          ref={props.cityToSearch}
+          type={'search'}
+          placeholder="Enter city name"
+        />
 
-      <button onClick={searchCity}>Search</button>
-      <button>Add to Favorite</button>
-      <h2>{searchedCity.name || 'The city'}</h2>
-      <h3>{searchedCity.temp || 'The weather'}</h3>
+        <button id="search-btn" onClick={props.city}>
+          Search
+        </button>
+        <br />
+      </div>
+      {/* <button onClick={props.getWeatherForWeek}>test</button> */}
+      <div className="favorite-btn">
+        <button onClick={props.addToFavorite} >Add to Favorite</button>
+      </div>
+      <h2>{props.theCity}</h2>
+      <h3>{props.searchedCityWeather}</h3>
+      <p>{props.error}</p>
+      <div className="5-Days"></div>
     </div>
   );
 }
