@@ -19,7 +19,7 @@ export default function Weather(props) {
       </div>
       {/* <button onClick={props.getWeatherForWeek}>test</button> */}
       <div className="favorite-btn">
-        <button onClick={props.addToFavorite} >Add to Favorite</button>
+        <button onClick={props.addToFavorite}>Add to Favorite</button>
       </div>
       <h2>{props.theCity}</h2>
       <h3>{props.searchedCityWeather}</h3>

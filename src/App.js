@@ -27,7 +27,7 @@ function App() {
     }
     try {
       const respoonse = await fetch(
-        `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${key}&q=${city}`
+        `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${key}&q=${city}`
       );
       if (!respoonse.ok) {
         throw new Error('Somthing went wrond');
@@ -46,7 +46,7 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        `http://dataservice.accuweather.com/currentconditions/v1/${id}?apikey=${key}`
+        `https://dataservice.accuweather.com/currentconditions/v1/${id}?apikey=${key}`
       );
       if (!response.ok) {
         throw new Error('Somthing went wrond');
@@ -62,7 +62,7 @@ function App() {
 
   const getWeatherForWeek = async () => {
     const response = await fetch(
-      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${id}?apikey=${key}`
+      `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${id}?apikey=${key}`
     );
     const data = await response.json();
 
