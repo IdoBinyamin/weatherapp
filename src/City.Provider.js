@@ -12,9 +12,14 @@ const CityWeatherProvider = ({ children }) => {
   const [searchedCity, setSearchedCity] = useState('');
   const [searchedCityWeather, setSearchedCityWeather] = useState('');
   const [allWeekDays, setAllWeekDays] = useState([]);
+  const [isExsist, setIsExist] = useState(false);
+
 
   const updateErrors = (updatedErrors) => {
     setErrors(updatedErrors);
+  };
+  const updateIsExsist = (isExsist) => {
+    setIsExist(isExsist);
   };
   const updateAllWeekDays = (week) => {
     setAllWeekDays(week);
@@ -43,6 +48,8 @@ const CityWeatherProvider = ({ children }) => {
         updateSearchedCity,
         allWeekDays,
         updateAllWeekDays,
+        updateIsExsist,
+        isExsist
       }}
     >
       {children}

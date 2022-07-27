@@ -4,7 +4,7 @@ import './Weather.css';
 import WeekShow from './WeekShow';
 
 export default function Weather(props) {
-  const { allWeekDays, searchedCity, searchedCityWeather } =
+  const { favoritesCities, isExsist, searchedCity, searchedCityWeather } =
     useCityWeatherProvider();
   const cityToSearch = useRef(null);
   function handleSearch() {
@@ -12,12 +12,18 @@ export default function Weather(props) {
   }
 
   function handleFavoriteBtn() {
+    if (isExsist) {
+      for (let i = 0; i < favoritesCities.length; i++) {
+        if (favoritesCities[i].name === searchedCity) {
+          favoritesCities.slice(favoritesCities[i], 1);
+        }
+      }
+    }
     props.addToFavorite();
-
-    console.log(allWeekDays);
+    console.log(isExsist);
+    // console.log(allWeekDays);
   }
 
-  
   return (
     <div className="main-page">
       <div id="search-panel">
@@ -36,15 +42,13 @@ export default function Weather(props) {
       </div>
       <div className="favorite-btn">
         <button onClick={handleFavoriteBtn}>
-          {props.isExist ? 'Remove from' : 'Add to'} Favorite
+          {isExsist ? 'Remove from' : 'Add to'} Favorite
         </button>
       </div>
       <h2>{searchedCity}</h2>
       <h3>{searchedCityWeather}</h3>
       <p>{props.error}</p>
-      <div className="five-Days">
-        {<WeekShow />}
-      </div>
+      <div className="five-Days">{<WeekShow />}</div>
     </div>
   );
 }

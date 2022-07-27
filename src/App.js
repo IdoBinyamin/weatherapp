@@ -23,8 +23,8 @@ function App() {
     updateSearchedCityWeather,
     allWeekDays,
     updateAllWeekDays,
+    updateIsExsist,
   } = useCityWeatherProvider();
-  const [isExist, setIsExist] = useState(false);
   const [id, setId] = useState('215854');
 
   useEffect(() => {
@@ -68,7 +68,7 @@ function App() {
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
       // console.log(searchedCityWeather);
-      setIsExist(
+      updateIsExsist(
         favoritesCities.filter((c) => {
           return c.name === cityToSearch;
         }).length === 1
@@ -110,7 +110,7 @@ function App() {
         temperature: temperature,
       });
     }
-    return improveArr
+    return improveArr;
   };
 
   const addOrRmoveFavorite = () => {
@@ -120,15 +120,16 @@ function App() {
       temp: searchedCityWeather,
       week: allWeekDays,
     };
+
     if (
-      favoritesCities.filter((c, i) => {
+      favoritesCities.filter((c) => {
         return c.name === searchedCity;
       }).length === 0
     ) {
       updateFavoritesCities(city);
     } else {
       alert('City allready in favorites list!');
-      setIsExist(true);
+      updateIsExsist(true);
     }
   };
 
@@ -141,7 +142,6 @@ function App() {
             path="/"
             element={
               <Weather
-                isExist={isExist}
                 addToFavorite={addOrRmoveFavorite}
                 getWeatherForWeek={getWeatherForWeek}
                 searchedCityWeather={searchedCityWeather}
