@@ -18,6 +18,7 @@ export default function Favorites(props) {
         return (
           <div
             key={i}
+            id={i}
             className="favorite-city"
             onClick={() => {
               getFavoriteDetails(c.name, c.temp);

@@ -4,8 +4,14 @@ import './Weather.css';
 import WeekShow from './WeekShow';
 
 export default function Weather(props) {
-  const {updateFavoritesCities, favoritesCities, isExsist, searchedCity, searchedCityWeather } =
-    useCityWeatherProvider();
+  const {
+    updateFavoritesCities,
+    favoritesCities,
+    isExsist,
+    searchedCity,
+    searchedCityWeather,
+    updateIsExsist,
+  } = useCityWeatherProvider();
   const cityToSearch = useRef(null);
   function handleSearch() {
     props.city(cityToSearch.current.value);
@@ -16,10 +22,10 @@ export default function Weather(props) {
   }
 
   function handleRemoveFavoriteBtn() {
-    console.log('work');
     const index = favoritesCities.findIndex((fav) => fav.name === searchedCity);
-    console.log(index);
-    updateFavoritesCities(favoritesCities.splice(index, 1)) ;
+    updateFavoritesCities(favoritesCities.splice(index, 1));
+    alert(`${searchedCity} removed!`);
+    updateIsExsist(false);
   }
 
   return (
