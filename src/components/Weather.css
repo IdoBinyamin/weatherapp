@@ -46,6 +46,19 @@
   #search-btn {
     width: 50%;
   }
+  .five-Days {
+    display: flex;
+    flex-direction: row;
+  }
+  .weekly {
+    display: flex;
+    border: 1px solid black;
+    justify-content: space-around;
+    flex-direction: row;
+    width: auto;
+    font-size: 12px;
+
+  }
 }
 
 @media (min-width: 700px) {
@@ -66,5 +79,18 @@
   .favorite-btn {
     display: flex;
     justify-content: center;
+  }
+  .five-Days {
+display: flex;
+flex-direction: row;
+justify-content:  space-around;
+  }
+  .weekly {
+    display: inline-flex;
+    border: 5px solid black;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: 12px;
+    padding: +6px;
   }
 }

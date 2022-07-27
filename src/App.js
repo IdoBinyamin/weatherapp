@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
+  const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
   // const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
   // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
-  const key ='WH3tbmkFRfOPa7P2BLOiyXHynDramr4G'
+  // const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
     favoritesCities,
@@ -30,14 +31,7 @@ function App() {
     getCityWeatherById('tel aviv');
   }, []);
 
-  // useEffect(()=>{
-  //   searchedCity,
-  //   searchedCityWeather,
-  //   allWeekDays
-  // }, [getCityWeatherById])
-
   const getCityId = async (city) => {
-    // get the id of the city that searched
     updateErrors(null);
     if (!city) {
       city = 'tel aviv';
@@ -51,7 +45,6 @@ function App() {
       }
       const data = await respoonse.json();
       updateSearchedCity(data[0].LocalizedName);
-      // console.log(data[0]);
       setId(data[0].Key);
     } catch (error) {
       updateErrors(error.message);
@@ -61,6 +54,8 @@ function App() {
   const getCityWeatherById = async (cityToSearch) => {
     updateErrors(null);
     getCityId(cityToSearch);
+    getWeatherForWeek();
+
     try {
       const response = await fetch(
         `https://dataservice.accuweather.com/currentconditions/v1/${id}?apikey=${key}`
@@ -72,8 +67,7 @@ function App() {
       updateSearchedCityWeather(
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
-      getWeatherForWeek();
-      console.log(searchedCityWeather);
+      // console.log(searchedCityWeather);
       setIsExist(
         favoritesCities.filter((c) => {
           return c.name === cityToSearch;
@@ -89,20 +83,43 @@ function App() {
       `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${id}?apikey=${key}`
     );
     const data = await response.json();
+    let res = dateDataHandler(data.DailyForecasts);
+    updateAllWeekDays(res);
+  };
 
-    // console.log(data.DailyForecasts);
-    updateAllWeekDays(data.DailyForecasts);
+  const dateDataHandler = (daysOfTheWeek) => {
+    const weekday = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    const improveArr = [];
+    for (let i = 0; i < daysOfTheWeek.length; i++) {
+      let specificDay = new Date(daysOfTheWeek[i].Date);
+      let numOfDayName = specificDay.getDay();
+      let dayName = weekday[numOfDayName];
+      let temperature = `${
+        ((daysOfTheWeek[i].Temperature.Maximum.Value - 32) * 5) / 9
+      }c`;
+      improveArr.push({
+        nameOfDay: dayName,
+        temperature: temperature,
+      });
+    }
+    return improveArr
   };
 
   const addOrRmoveFavorite = () => {
-    // console.log('work');
     const city = {
       id: Math.random(),
       name: searchedCity,
       temp: searchedCityWeather,
       week: allWeekDays,
     };
-    // console.log(city);
     if (
       favoritesCities.filter((c, i) => {
         return c.name === searchedCity;
@@ -113,7 +130,6 @@ function App() {
       alert('City allready in favorites list!');
       setIsExist(true);
     }
-    // console.log(favoritesCities);
   };
 
   return (

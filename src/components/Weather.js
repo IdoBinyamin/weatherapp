@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useCityWeatherProvider } from '../City.Provider';
 import './Weather.css';
+import WeekShow from './WeekShow';
 
 export default function Weather(props) {
   const { allWeekDays, searchedCity, searchedCityWeather } =
@@ -13,9 +14,10 @@ export default function Weather(props) {
   function handleFavoriteBtn() {
     props.addToFavorite();
 
-    console.log(cityToSearch.current.value, allWeekDays);
+    console.log(allWeekDays);
   }
 
+  
   return (
     <div className="main-page">
       <div id="search-panel">
@@ -23,7 +25,7 @@ export default function Weather(props) {
           id="search-line"
           ref={cityToSearch}
           type={'search'}
-          // defaultValue="Tel Aviv"
+          defaultValue="Tel Aviv"
           placeholder="Enter city name"
         />
 
@@ -40,7 +42,9 @@ export default function Weather(props) {
       <h2>{searchedCity}</h2>
       <h3>{searchedCityWeather}</h3>
       <p>{props.error}</p>
-      <div className="5-Days">{/* <p>{AllWeekDays[0].Date}</p> */}</div>
+      <div className="five-Days">
+        {<WeekShow />}
+      </div>
     </div>
   );
 }
