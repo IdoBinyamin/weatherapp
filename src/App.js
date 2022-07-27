@@ -3,25 +3,42 @@ import Weather from './components/Weather';
 import { Routes, BrowserRouter as HashRouter, Route } from 'react-router-dom';
 import Favorites from './components/Favorites';
 import Title from './components/Title';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
-  const [searchedCity, setSearchedCity] = useState('');
-  const [error, setError] = useState(null);
-  const [searchedCityWeather, setSearchedCityWeather] = useState('');
-  const cityToSearch = useRef('');
-  let week = [];
-  const favoritesCitys = [
-    { name: 'Sderot', temp: '27c', week: [] },
-    { name: 'Yeruham', temp: '31c', week: [] },
-  ];
-
   // const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
-  const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  const key ='WH3tbmkFRfOPa7P2BLOiyXHynDramr4G'
+
+  const {
+    favoritesCities,
+    updateFavoritesCities,
+    errors,
+    updateErrors,
+    searchedCity,
+    updateSearchedCity,
+    searchedCityWeather,
+    updateSearchedCityWeather,
+    allWeekDays,
+    updateAllWeekDays,
+  } = useCityWeatherProvider();
+  const [isExist, setIsExist] = useState(false);
   const [id, setId] = useState('215854');
 
+  useEffect(() => {
+    getCityWeatherById('tel aviv');
+  }, []);
+
+  // useEffect(()=>{
+  //   searchedCity,
+  //   searchedCityWeather,
+  //   allWeekDays
+  // }, [getCityWeatherById])
+
   const getCityId = async (city) => {
-    setError(null);
+    // get the id of the city that searched
+    updateErrors(null);
     if (!city) {
       city = 'tel aviv';
     }
@@ -33,17 +50,17 @@ function App() {
         throw new Error('Somthing went wrond');
       }
       const data = await respoonse.json();
-      setSearchedCity(data[0].LocalizedName);
+      updateSearchedCity(data[0].LocalizedName);
       // console.log(data[0]);
       setId(data[0].Key);
     } catch (error) {
-      setError(error.message);
+      updateErrors(error.message);
     }
   };
 
-  const searchCity = async () => {
-    getCityId(cityToSearch.current.value);
-    setError(null);
+  const getCityWeatherById = async (cityToSearch) => {
+    updateErrors(null);
+    getCityId(cityToSearch);
     try {
       const response = await fetch(
         `https://dataservice.accuweather.com/currentconditions/v1/${id}?apikey=${key}`
@@ -52,11 +69,18 @@ function App() {
         throw new Error('Somthing went wrond');
       }
       const data = await response.json();
-      setSearchedCityWeather(
+      updateSearchedCityWeather(
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
+      getWeatherForWeek();
+      console.log(searchedCityWeather);
+      setIsExist(
+        favoritesCities.filter((c) => {
+          return c.name === cityToSearch;
+        }).length === 1
+      );
     } catch (error) {
-      setError(error.message);
+      updateErrors(error.message);
     }
   };
 
@@ -66,24 +90,30 @@ function App() {
     );
     const data = await response.json();
 
-    console.log(data.DailyForecasts);
-    data.DailyForecasts.map((d) => {
-      return week.push({
-        date: d.Date,
-        min: d.Temperature.Minimum.Value,
-        max: d.Temperature.Maximum.Value,
-      });
-    });
-    console.log(week);
+    // console.log(data.DailyForecasts);
+    updateAllWeekDays(data.DailyForecasts);
   };
 
-  const addToFavorite = () => {
+  const addOrRmoveFavorite = () => {
+    // console.log('work');
     const city = {
+      id: Math.random(),
       name: searchedCity,
       temp: searchedCityWeather,
-      week: [],
+      week: allWeekDays,
     };
-    favoritesCitys.push(city);
+    // console.log(city);
+    if (
+      favoritesCities.filter((c, i) => {
+        return c.name === searchedCity;
+      }).length === 0
+    ) {
+      updateFavoritesCities(city);
+    } else {
+      alert('City allready in favorites list!');
+      setIsExist(true);
+    }
+    // console.log(favoritesCities);
   };
 
   return (
@@ -95,21 +125,18 @@ function App() {
             path="/"
             element={
               <Weather
-              addToFavorite={addToFavorite}
+                isExist={isExist}
+                addToFavorite={addOrRmoveFavorite}
                 getWeatherForWeek={getWeatherForWeek}
                 searchedCityWeather={searchedCityWeather}
-                cityToSearch={cityToSearch}
-                city={searchCity}
+                city={getCityWeatherById}
                 theCity={searchedCity}
                 id={id}
-                error={error}
+                error={errors}
               />
             }
           />
-          <Route
-            path="/favorites"
-            element={<Favorites favoList={favoritesCitys} />}
-          />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </HashRouter>
     </div>

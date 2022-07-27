@@ -1,14 +1,13 @@
-.favorite-page{
-    display: flex;
-    justify-content: left;
-    flex-direction: row;
-    
+.favorite-page {
+  display: flex;
+  justify-content: right;
+  flex-direction: row;
 }
-.favorite-city{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    border: 3px solid black;
-    padding: 1px;
-    width: 25%;
+.favorite-city {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px solid black;
+  padding: 1px;
+  width: 25%;
 }

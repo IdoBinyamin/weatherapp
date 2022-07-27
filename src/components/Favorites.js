@@ -1,10 +1,13 @@
 import React from 'react';
+import { useCityWeatherProvider } from '../City.Provider';
 import './Favorites.css'
 
 export default function Favorites(props) {
+const {favoritesCities} = useCityWeatherProvider()
+
   return (
     <div className='favorite-page'>
-      {props.favoList.map((c, i) => {
+      {favoritesCities.map((c, i) => {
         return (
           <div key={i} className="favorite-city">
             <p>{c.name}</p>
