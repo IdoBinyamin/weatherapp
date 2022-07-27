@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
-  const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
-  // const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
+  // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
+  const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
   // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
   // const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
@@ -24,6 +24,7 @@ function App() {
     allWeekDays,
     updateAllWeekDays,
     updateIsExsist,
+    isExsist,
   } = useCityWeatherProvider();
   const [id, setId] = useState('215854');
 
@@ -67,7 +68,6 @@ function App() {
       updateSearchedCityWeather(
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
-      // console.log(searchedCityWeather);
       updateIsExsist(
         favoritesCities.filter((c) => {
           return c.name === cityToSearch;
@@ -103,11 +103,11 @@ function App() {
       let numOfDayName = specificDay.getDay();
       let dayName = weekday[numOfDayName];
       let temperature = `${
-        ((daysOfTheWeek[i].Temperature.Maximum.Value - 32) * 5) / 9
+        Math.round(((daysOfTheWeek[i].Temperature.Maximum.Value - 32) * 5) / 9)
       }c`;
       improveArr.push({
         nameOfDay: dayName,
-        temperature: temperature,
+        temperature: temperature
       });
     }
     return improveArr;

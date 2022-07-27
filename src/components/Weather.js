@@ -4,24 +4,22 @@ import './Weather.css';
 import WeekShow from './WeekShow';
 
 export default function Weather(props) {
-  const { favoritesCities, isExsist, searchedCity, searchedCityWeather } =
+  const {updateFavoritesCities, favoritesCities, isExsist, searchedCity, searchedCityWeather } =
     useCityWeatherProvider();
   const cityToSearch = useRef(null);
   function handleSearch() {
     props.city(cityToSearch.current.value);
   }
 
-  function handleFavoriteBtn() {
-    if (isExsist) {
-      for (let i = 0; i < favoritesCities.length; i++) {
-        if (favoritesCities[i].name === searchedCity) {
-          favoritesCities.slice(favoritesCities[i], 1);
-        }
-      }
-    }
+  function handleAddFavoriteBtn() {
     props.addToFavorite();
-    console.log(isExsist);
-    // console.log(allWeekDays);
+  }
+
+  function handleRemoveFavoriteBtn() {
+    console.log('work');
+    const index = favoritesCities.findIndex((fav) => fav.name === searchedCity);
+    console.log(index);
+    updateFavoritesCities(favoritesCities.splice(index, 1)) ;
   }
 
   return (
@@ -31,7 +29,6 @@ export default function Weather(props) {
           id="search-line"
           ref={cityToSearch}
           type={'search'}
-          defaultValue="Tel Aviv"
           placeholder="Enter city name"
         />
 
@@ -41,7 +38,9 @@ export default function Weather(props) {
         <br />
       </div>
       <div className="favorite-btn">
-        <button onClick={handleFavoriteBtn}>
+        <button
+          onClick={isExsist ? handleRemoveFavoriteBtn : handleAddFavoriteBtn}
+        >
           {isExsist ? 'Remove from' : 'Add to'} Favorite
         </button>
       </div>
