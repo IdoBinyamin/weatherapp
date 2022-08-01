@@ -7,16 +7,19 @@ export function useCityWeatherProvider() {
 }
 
 const CityWeatherProvider = ({ children }) => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState('');
   const [favoritesCities, setFavoritesCities] = useState([]);
   const [searchedCity, setSearchedCity] = useState('');
   const [searchedCityWeather, setSearchedCityWeather] = useState('');
   const [allWeekDays, setAllWeekDays] = useState([]);
   const [isExsist, setIsExist] = useState(false);
-
+  const [currCondition, setCurrCondition] = useState('');
 
   const updateErrors = (updatedErrors) => {
     setErrors(updatedErrors);
+  };
+  const updateCurrCondition = (currCondition) => {
+    setCurrCondition(currCondition);
   };
   const updateIsExsist = (isExsist) => {
     setIsExist(isExsist);
@@ -24,8 +27,8 @@ const CityWeatherProvider = ({ children }) => {
   const updateAllWeekDays = (week) => {
     setAllWeekDays(week);
   };
-  const updateSearchedCityWeather = (updatedErrors) => {
-    setSearchedCityWeather(updatedErrors);
+  const updateSearchedCityWeather = (cityTemp) => {
+    setSearchedCityWeather(cityTemp);
   };
 
   const updateSearchedCity = (cityName) => {
@@ -33,6 +36,9 @@ const CityWeatherProvider = ({ children }) => {
   };
   const updateFavoritesCities = (city) => {
     setFavoritesCities([...favoritesCities, city]);
+  };
+  const updateRemoveFavoritesCities = (city) => {
+    setFavoritesCities(city);
   };
 
   return (
@@ -42,6 +48,7 @@ const CityWeatherProvider = ({ children }) => {
         updateErrors,
         favoritesCities,
         updateFavoritesCities,
+        updateRemoveFavoritesCities,
         searchedCityWeather,
         updateSearchedCityWeather,
         searchedCity,
@@ -49,7 +56,9 @@ const CityWeatherProvider = ({ children }) => {
         allWeekDays,
         updateAllWeekDays,
         updateIsExsist,
-        isExsist
+        isExsist,
+        currCondition,
+        updateCurrCondition,
       }}
     >
       {children}

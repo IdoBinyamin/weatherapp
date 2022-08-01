@@ -1,8 +1,27 @@
-.headline-title{
-    display: flex;
-    flex-direction: row;
+.headline-title {
+  display: flex;
+  padding-bottom: 15px;
+  flex-direction: row;
+  border-bottom: 2px solid black;
+  background-image: url('../img/icons/01-s.png');
+}
+
+@media (min-width: 700px) {
+  /* web */
+  .headline-title {
+    margin-top: -110px;
     justify-content: flex-end;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid black;
+    padding-right: 6px;
+  }
+}
+@media (max-width: 700px) {
+  /* mobile */
+  .headline-title {
+    margin-top: 30px;
+    justify-content: space-around;
+  }
+  .headline-title button {
+    width: 70px;
+    border-radius: 10px;
+  }
 }

@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
-  const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
+  // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
+  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
     favoritesCities,
@@ -21,6 +23,8 @@ function App() {
     allWeekDays,
     updateAllWeekDays,
     updateIsExsist,
+    currCondition,
+    // updateCurrCondition,
   } = useCityWeatherProvider();
   const [id, setId] = useState('215854');
 
@@ -64,6 +68,8 @@ function App() {
       updateSearchedCityWeather(
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
+      // updateCurrCondition(data[0].WeatherIcon)
+      // console.log(data[0].WeatherIcon);
       updateIsExsist(
         favoritesCities.filter((c) => {
           return c.name === cityToSearch;
@@ -75,24 +81,20 @@ function App() {
   };
 
   const getWeatherForWeek = async () => {
-    const response = await fetch(
-      `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${id}?apikey=${key}`
-    );
-    const data = await response.json();
-    let res = dateDataHandler(data.DailyForecasts);
-    updateAllWeekDays(res);
+    try {
+      const response = await fetch(
+        `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${id}?apikey=${key}`
+      );
+      const data = await response.json();
+      let res = dateDataHandler(data.DailyForecasts);
+      updateAllWeekDays(res);
+    } catch (error) {
+      updateErrors(error.message);
+    }
   };
 
   const dateDataHandler = (daysOfTheWeek) => {
-    const weekday = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
+    const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const improveArr = [];
     for (let i = 0; i < daysOfTheWeek.length; i++) {
       let specificDay = new Date(daysOfTheWeek[i].Date);
@@ -114,6 +116,7 @@ function App() {
       id: Math.random(),
       name: searchedCity,
       temp: searchedCityWeather,
+      icon: currCondition,
       week: allWeekDays,
     };
 
