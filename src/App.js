@@ -8,8 +8,8 @@ import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
   // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
-  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
-  const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
+  const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  // const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
     favoritesCities,
@@ -23,8 +23,7 @@ function App() {
     allWeekDays,
     updateAllWeekDays,
     updateIsExsist,
-    currCondition,
-    // updateCurrCondition,
+   
   } = useCityWeatherProvider();
   const [id, setId] = useState('215854');
 
@@ -116,7 +115,6 @@ function App() {
       id: Math.random(),
       name: searchedCity,
       temp: searchedCityWeather,
-      icon: currCondition,
       week: allWeekDays,
     };
 

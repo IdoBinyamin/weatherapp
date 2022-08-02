@@ -1,16 +1,25 @@
-import React from 'react';
-import './Title.css'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import './Title.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Title() {
+  const navigate = useNavigate();
   return (
-    <div className='headline-title'>
-      <Link to={'/'}>
-        <button>Home</button>
-      </Link>
-      <Link to={'/favorites'}>
-        <button>Favorites</button>
-      </Link>
+    <div className="headline-title">
+      <h1
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Home
+      </h1>
+      <h1
+        onClick={() => {
+          navigate('/favorites');
+        }}
+      >
+        Favorites
+      </h1>
     </div>
   );
 }

@@ -5,20 +5,16 @@
   text-align: center;
   flex-direction: column;
   background-color: #d3e2f4;
-  /* background-repeat: no-repeat;
-  background-size: 100% 100%; */
 }
 @media (min-width: 700px) {
   /* web */
   .App {
     justify-content: space-around;
-    /* background-image: url(../src/img/title.avif); */
   }
 }
 @media (max-width: 700px) {
   /*  mobile */
   .App {
     justify-content: space-between;
-    /* background-image: url(../src/img/mobilBG.webp); */
   }
 }

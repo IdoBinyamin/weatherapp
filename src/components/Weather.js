@@ -11,10 +11,9 @@ export default function Weather(props) {
     searchedCity,
     searchedCityWeather,
     updateIsExsist,
-    // currCondition,
   } = useCityWeatherProvider();
   const cityToSearch = useRef(null);
-let bgPhoto = `url(${'../img/icons/' + '01' + '-s.png'})`;
+  // let background = '../img/icons/01-s.png';
   let errorMsg = '';
   if (
     props.error ===
@@ -33,7 +32,11 @@ let bgPhoto = `url(${'../img/icons/' + '01' + '-s.png'})`;
   }
 
   function handleAddFavoriteBtn() {
-    searchedCity !== '' ? props.addToFavorite() : alert('Search city name!');
+    favoritesCities.length > 5
+      ? alert('Too maney favorites!,The list limited to 6')
+      : searchedCity !== ''
+      ? props.addToFavorite()
+      : alert('Search city name!');
   }
 
   function handleRemoveFavoriteBtn() {
@@ -63,19 +66,22 @@ let bgPhoto = `url(${'../img/icons/' + '01' + '-s.png'})`;
 
       <div className="favorite-btn">
         <button
+          id="favorite-btn"
           onClick={isExsist ? handleRemoveFavoriteBtn : handleAddFavoriteBtn}
         >
           {isExsist ? 'Remove from' : 'Add to'} Favorite
         </button>
       </div>
-      <h2>{searchedCity}</h2>
-      <h3>{searchedCityWeather}</h3>
-      <div 
+
+      <div
+        id={'icon'}
         style={{
-          backgroundImage: bgPhoto , backgroundRepeat: 'no-repeat',
-           backgroundSize: '100% 100%', height:'150px', width:'150px'
-        ,}}
-      ></div>
+          display: 'flex',
+        }}
+      >
+        <h2>{searchedCity}</h2>
+        <h3>{searchedCityWeather}</h3>
+      </div>
       <div className="five-Days">{<WeekShow />}</div>
     </div>
   );
