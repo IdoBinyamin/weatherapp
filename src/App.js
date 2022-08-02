@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
-  // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
-  const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
+  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
   // const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
@@ -23,7 +23,7 @@ function App() {
     allWeekDays,
     updateAllWeekDays,
     updateIsExsist,
-   
+    updateCurrCondition,
   } = useCityWeatherProvider();
   const [id, setId] = useState('215854');
 
@@ -67,7 +67,7 @@ function App() {
       updateSearchedCityWeather(
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
-      // updateCurrCondition(data[0].WeatherIcon)
+      updateCurrCondition(data[0].WeatherIcon)
       // console.log(data[0].WeatherIcon);
       updateIsExsist(
         favoritesCities.filter((c) => {

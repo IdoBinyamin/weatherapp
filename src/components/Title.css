@@ -1,45 +1,33 @@
 .headline-title {
   display: flex;
-  background-color: black;
-  padding-bottom: 15px;
+  width: 99%;
+  height: 70px;
   flex-direction: row;
   border-bottom: 2px solid black;
+  font-size: 14px;
+  background-color: black;
+  font-family: sans-serif;
+}
+.headline-title h1 {
+  color: azure;
+}
+.headline-title h1:hover {
+  color: yellow;
+  cursor: grab;
 }
 
 @media (min-width: 700px) {
   /* web */
   .headline-title {
-    margin-top: -210px;
     justify-content: space-between;
-    padding-right: 6px;
-    padding-top: 6%;
-  }
-  .headline-title button {
-    margin-left: 6px;
-    font-size: 10px;
-    font-family: sans-serif;
-    font-weight: bold;
-    border-radius: 10px;
-    background-color: black;
-  }
-  .headline-title h1{
-    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 @media (max-width: 700px) {
   /* mobile */
   .headline-title {
-    margin-top: 0px;
-    justify-content: space-between;
+    justify-content: space-around;
   }
-  .headline-title button {
-    margin-top: 13px;
-    font-size: 6px;
-    width: 70px;
-    border-radius: 10px;
-    background-color: black;
-  }
-  .headline-title h1{
-    color: white;
-  }
+
 }

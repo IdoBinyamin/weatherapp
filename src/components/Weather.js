@@ -11,9 +11,10 @@ export default function Weather(props) {
     searchedCity,
     searchedCityWeather,
     updateIsExsist,
+    currCondition,
   } = useCityWeatherProvider();
   const cityToSearch = useRef(null);
-  // let background = '../img/icons/01-s.png';
+
   let errorMsg = '';
   if (
     props.error ===
@@ -32,11 +33,7 @@ export default function Weather(props) {
   }
 
   function handleAddFavoriteBtn() {
-    favoritesCities.length > 5
-      ? alert('Too maney favorites!,The list limited to 6')
-      : searchedCity !== ''
-      ? props.addToFavorite()
-      : alert('Search city name!');
+    searchedCity !== '' ? props.addToFavorite() : alert('Search city name!');
   }
 
   function handleRemoveFavoriteBtn() {
@@ -62,25 +59,30 @@ export default function Weather(props) {
         </button>
         <br />
       </div>
-      <p>{errorMsg}</p>
+      <p id="error">{errorMsg}</p>
 
+      <div className="details">
+        <h2 className="write-to-center">{searchedCity}</h2>
+        <h3 className="write-to-center">{searchedCityWeather}</h3>
+      </div>
+      <div className="icon">
+        <div
+          id={'icon'}
+          style={{
+            display: 'flex',
+            backgroundImage: `url("https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/${
+              currCondition < 10 ? '0' + currCondition : currCondition
+            }-s.png")`,
+          }}
+        ></div>
+      </div>
       <div className="favorite-btn">
         <button
           id="favorite-btn"
           onClick={isExsist ? handleRemoveFavoriteBtn : handleAddFavoriteBtn}
         >
-          {isExsist ? 'Remove from' : 'Add to'} Favorite
+          {isExsist ? '- Remove from' : '+ Add to'} Favorite
         </button>
-      </div>
-
-      <div
-        id={'icon'}
-        style={{
-          display: 'flex',
-        }}
-      >
-        <h2>{searchedCity}</h2>
-        <h3>{searchedCityWeather}</h3>
       </div>
       <div className="five-Days">{<WeekShow />}</div>
     </div>

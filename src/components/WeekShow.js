@@ -5,12 +5,12 @@ export default function WeekShow() {
   const { allWeekDays } = useCityWeatherProvider();
 
   return (
-    <div>
+    <div className="weekly">
       {allWeekDays.map((d, i) => {
         return (
-          <div key={i} className={'weekly'}>
-            <p>{d.nameOfDay}</p>
-            <p>{d.temperature}</p>
+          <div key={i} className={'day'}>
+            <p className='write-to-center' id='day-name'>{d.nameOfDay}</p>
+            <p className='write-to-center' id='day-temp'>{d.temperature}</p>
           </div>
         );
       })}
