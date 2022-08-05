@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Title.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function Title() {
+export default function Title(props) {
   const navigate = useNavigate();
   return (
     <div className="headline-title">
       <h1
         onClick={() => {
+          // props.defaultCity()
           navigate('/');
         }}
       >

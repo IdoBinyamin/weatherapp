@@ -9,14 +9,17 @@ export default function Favorites(props) {
     updateSearchedCityWeather,
     updateAllWeekDays,
     updateSearchedCity,
+    updateCurrCondition,
   } = useCityWeatherProvider();
 
   const navigate = useNavigate('');
 
-  const getFavoriteDetails = (name, temp, week) => {
+  const getFavoriteDetails = (name, temp, week, skyCondition) => {
     updateSearchedCityWeather(temp);
     updateSearchedCity(name);
     updateAllWeekDays(week);
+    updateCurrCondition(skyCondition);
+
     navigate('/');
   };
   return (
@@ -29,10 +32,7 @@ export default function Favorites(props) {
                 id={i}
                 className="favorite-city"
                 onClick={() => {
-                  getFavoriteDetails(c.name, c.temp, c.week);
-                }}
-                style={{
-                  backgroundImage: `url(${'../img/icons/08-s.png'})`,
+                  getFavoriteDetails(c.name, c.temp, c.week, c.skyCondition);
                 }}
               >
                 <p>{c.name}</p>

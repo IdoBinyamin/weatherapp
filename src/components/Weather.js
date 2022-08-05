@@ -24,11 +24,11 @@ export default function Weather(props) {
   }
 
   function handleSearch() {
-    if (cityToSearch.current.value < 'a' || cityToSearch.current.value > 'z') {
+    if (cityToSearch.current.value.toLowerCase() < 'a' || cityToSearch.current.value.toLowerCase() > 'z') {
       alert('Search only in English!');
       return;
     } else {
-      props.city(cityToSearch.current.value);
+    return  props.cityInfo(cityToSearch.current.value);
     }
   }
 

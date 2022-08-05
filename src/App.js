@@ -1,14 +1,18 @@
 import './App.css';
 import Weather from './components/Weather';
-import { Routes, BrowserRouter as HashRouter, Route } from 'react-router-dom';
+import {
+  Routes,
+  BrowserRouter as HashRouter,
+  Route,
+} from 'react-router-dom';
 import Favorites from './components/Favorites';
 import Title from './components/Title';
 import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
-  const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
-  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
+  const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
   // const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
@@ -23,13 +27,14 @@ function App() {
     allWeekDays,
     updateAllWeekDays,
     updateIsExsist,
+    currCondition,
     updateCurrCondition,
   } = useCityWeatherProvider();
-  const [id, setId] = useState('215854');
-
+  const [id, setId] = useState('');
   useEffect(() => {
-    getCityWeatherById('tel aviv');
+    getCityWeatherInfo('tel aviv');
   }, []);
+
 
   const getCityId = async (city) => {
     updateErrors(null);
@@ -51,7 +56,7 @@ function App() {
     }
   };
 
-  const getCityWeatherById = async (cityToSearch) => {
+  const getCityWeatherInfo = async (cityToSearch = 'tel aviv') => {
     updateErrors(null);
     getCityId(cityToSearch);
     getWeatherForWeek();
@@ -67,8 +72,9 @@ function App() {
       updateSearchedCityWeather(
         data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
       );
-      updateCurrCondition(data[0].WeatherIcon)
-      // console.log(data[0].WeatherIcon);
+      updateCurrCondition(data[0].WeatherIcon);
+      // console.log(data[0].IsDayTime);
+      // console.log(searchedCityWeather);
       updateIsExsist(
         favoritesCities.filter((c) => {
           return c.name === cityToSearch;
@@ -94,7 +100,7 @@ function App() {
 
   const dateDataHandler = (daysOfTheWeek) => {
     const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const improveArr = [];
+    const listOfDaysAndTemp = [];
     for (let i = 0; i < daysOfTheWeek.length; i++) {
       let specificDay = new Date(daysOfTheWeek[i].Date);
       let numOfDayName = specificDay.getDay();
@@ -102,12 +108,12 @@ function App() {
       let temperature = `${Math.round(
         ((daysOfTheWeek[i].Temperature.Maximum.Value - 32) * 5) / 9
       )}c`;
-      improveArr.push({
+      listOfDaysAndTemp.push({
         nameOfDay: dayName,
         temperature: temperature,
       });
     }
-    return improveArr;
+    return listOfDaysAndTemp;
   };
 
   const addOrRmoveFavorite = () => {
@@ -116,6 +122,7 @@ function App() {
       name: searchedCity,
       temp: searchedCityWeather,
       week: allWeekDays,
+      skyCondition: currCondition,
     };
 
     if (
@@ -133,7 +140,7 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-        <Title />
+        <Title defaultCity = {getCityWeatherInfo}/>
         <Routes>
           <Route
             path="/"
@@ -142,7 +149,7 @@ function App() {
                 addToFavorite={addOrRmoveFavorite}
                 getWeatherForWeek={getWeatherForWeek}
                 searchedCityWeather={searchedCityWeather}
-                city={getCityWeatherById}
+                cityInfo={getCityWeatherInfo}
                 theCity={searchedCity}
                 id={id}
                 error={errors}
