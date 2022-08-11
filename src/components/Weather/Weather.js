@@ -71,8 +71,8 @@ export default function Weather(props) {
       <div className="details">
         <h2 className="write-to-center">
           {searchedCity}{' '}
-          <p className="favorite-btn" onClick={handleAddFavoriteBtn}>
-            {isExsist ? '❤️' : '🤍'}
+          <p className="favorite-btn" onClick={handleAddFavoriteBtn} style={{color:`${isExsist ?  'yellow' : ''}`}}>
+            &#9734;
           </p>
         </h2>
         <h3 className="write-to-center">{searchedCityWeather} &#8451;</h3>

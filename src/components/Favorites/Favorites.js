@@ -35,7 +35,6 @@ export default function Favorites(props) {
                   getFavoriteDetails(c.name, c.temp, c.week, c.skyCondition);
                 }}
               >
-                <p style={{height:'2px', weight:'2px', marginBottom:'0px'}}>❤️</p>
                 <p>{c.name}</p>
                 <p>{c.temp}&#8451;</p>
               </div>

@@ -3,8 +3,7 @@ import './Title.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Title() {
-  // const HOME = ;
-  // const FAVORITE = 
+ 
   const navigate = useNavigate();
   return (
     <div className="headline-title">
@@ -20,7 +19,7 @@ export default function Title() {
           navigate('/favorites');
         }}
       >
-         Favorites
+        &#9734; Favorites
       </h1>
     </div>
   );
