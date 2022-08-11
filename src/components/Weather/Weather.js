@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { useCityWeatherProvider } from '../City.Provider';
+import { useCityWeatherProvider } from '../../City.Provider';
 import './Weather.css';
-import WeekShow from './WeekShow';
+import WeekShow from '../weekShoow/WeekShow';
 
 export default function Weather(props) {
   const {
@@ -24,16 +24,23 @@ export default function Weather(props) {
   }
 
   function handleSearch() {
-    if (cityToSearch.current.value.toLowerCase() < 'a' || cityToSearch.current.value.toLowerCase() > 'z') {
+    if (
+      cityToSearch.current.value.toLowerCase() < 'a' ||
+      cityToSearch.current.value.toLowerCase() > 'z'
+    ) {
       alert('Search only in English!');
       return;
     } else {
-    return  props.cityInfo(cityToSearch.current.value);
+      return props.cityInfo(cityToSearch.current.value);
     }
   }
 
   function handleAddFavoriteBtn() {
-    searchedCity !== '' ? props.addToFavorite() : alert('Search city name!');
+    if (isExsist) {
+      handleRemoveFavoriteBtn();
+    } else {
+      searchedCity !== '' ? props.addToFavorite() : alert('Search city name!');
+    }
   }
 
   function handleRemoveFavoriteBtn() {
@@ -62,8 +69,13 @@ export default function Weather(props) {
       <p id="error">{errorMsg}</p>
 
       <div className="details">
-        <h2 className="write-to-center">{searchedCity}</h2>
-        <h3 className="write-to-center">{searchedCityWeather}</h3>
+        <h2 className="write-to-center">
+          {searchedCity}{' '}
+          <p className="favorite-btn" onClick={handleAddFavoriteBtn}>
+            {isExsist ? '❤️' : '🤍'}
+          </p>
+        </h2>
+        <h3 className="write-to-center">{searchedCityWeather} &#8451;</h3>
       </div>
       <div className="icon">
         <div
@@ -76,14 +88,7 @@ export default function Weather(props) {
           }}
         ></div>
       </div>
-      <div className="favorite-btn">
-        <button
-          id="favorite-btn"
-          onClick={isExsist ? handleRemoveFavoriteBtn : handleAddFavoriteBtn}
-        >
-          {isExsist ? '- Remove from' : '+ Add to'} Favorite
-        </button>
-      </div>
+
       <div className="five-Days">{<WeekShow />}</div>
     </div>
   );

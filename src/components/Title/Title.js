@@ -2,24 +2,25 @@ import React from 'react';
 import './Title.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function Title(props) {
+export default function Title() {
+  // const HOME = ;
+  // const FAVORITE = 
   const navigate = useNavigate();
   return (
     <div className="headline-title">
       <h1
         onClick={() => {
-          // props.defaultCity()
-          navigate('/');
+          navigate('/weatherapp');
         }}
       >
-        Home
+       Home
       </h1>
       <h1
         onClick={() => {
           navigate('/favorites');
         }}
       >
-        Favorites
+         Favorites
       </h1>
     </div>
   );

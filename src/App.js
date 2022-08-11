@@ -1,19 +1,15 @@
 import './App.css';
-import Weather from './components/Weather';
-import {
-  Routes,
-  BrowserRouter as HashRouter,
-  Route,
-} from 'react-router-dom';
-import Favorites from './components/Favorites';
-import Title from './components/Title';
+import Weather from './components/Weather/Weather';
+import { Routes, BrowserRouter as HashRouter, Route } from 'react-router-dom';
+import Favorites from './components/Favorites/Favorites';
+import Title from './components/Title/Title';
 import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
   // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
-  const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
-  // const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
+  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
     favoritesCities,
@@ -30,11 +26,12 @@ function App() {
     currCondition,
     updateCurrCondition,
   } = useCityWeatherProvider();
+  
   const [id, setId] = useState('');
+
   useEffect(() => {
     getCityWeatherInfo('tel aviv');
   }, []);
-
 
   const getCityId = async (city) => {
     updateErrors(null);
@@ -69,9 +66,7 @@ function App() {
         throw new Error('Somthing went wrond');
       }
       const data = await response.json();
-      updateSearchedCityWeather(
-        data[0].Temperature.Metric.Value + `${data[0].Temperature.Metric.Unit}`
-      );
+      updateSearchedCityWeather(data[0].Temperature.Metric.Value);
       updateCurrCondition(data[0].WeatherIcon);
       // console.log(data[0].IsDayTime);
       // console.log(searchedCityWeather);
@@ -105,9 +100,9 @@ function App() {
       let specificDay = new Date(daysOfTheWeek[i].Date);
       let numOfDayName = specificDay.getDay();
       let dayName = weekday[numOfDayName];
-      let temperature = `${Math.round(
+      let temperature = Math.round(
         ((daysOfTheWeek[i].Temperature.Maximum.Value - 32) * 5) / 9
-      )}c`;
+      );
       listOfDaysAndTemp.push({
         nameOfDay: dayName,
         temperature: temperature,
@@ -140,10 +135,10 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-        <Title defaultCity = {getCityWeatherInfo}/>
+        <Title defaultCity={getCityWeatherInfo} />
         <Routes>
           <Route
-            path="/"
+            path="/weatherapp"
             element={
               <Weather
                 addToFavorite={addOrRmoveFavorite}

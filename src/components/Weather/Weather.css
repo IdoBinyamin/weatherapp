@@ -1,11 +1,12 @@
 .main-page {
   display: inline;
   justify-content: center;
+  font-family: sans-serif;
 }
 @media (max-width: 700px) {
   /*  mobile */
-  .main-page {
-  }
+  /* .main-page {
+  } */
 }
 
 .write-to-center {
@@ -19,7 +20,6 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  font-family: sans-serif;
 }
 @media (min-width: 700px) {
   /* web */
@@ -43,7 +43,6 @@
   justify-content: center;
   border-radius: 10px;
   height: 50px;
-  font-family: sans-serif;
   width: 180px;
 }
 
@@ -58,7 +57,6 @@
 #search-btn {
   color: azure;
   background-color: black;
-  font-family: sans-serif;
 }
 #search-btn:hover {
   font-weight: bold;
@@ -73,40 +71,53 @@
     margin-left: 15px;
     height: 50px;
     width: 120px;
-    font-size: 20px; 
-
+    font-size: 20px;
   }
 }
 @media (max-width: 700px) {
   /*  mobile */
   #search-btn {
     height: 40px;
-    font-size: 20px; 
+    font-size: 20px;
   }
 }
 
-
-#error{
+#error {
   display: flex;
   justify-content: center;
-  font-family: sans-serif;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-top: 100px;
+  margin-bottom: -70px;
 }
 
 .details {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  font-family: sans-serif;
+  margin-top: 170px;
 }
 .details h2 {
   margin-bottom: 0;
 }
+.favorite-btn {
+  display: flex;
+  cursor: grab;
+  height: 0px;
+  width: 0px;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 700px) {
+  /*  mobile */
+  .favorite-btn {
+    cursor: grab;
+  }
+}
 .details h3 {
   margin-top: 0;
 }
-
 
 .icon {
   display: flex;
@@ -114,10 +125,10 @@
   justify-content: center;
 }
 @media (max-width: 700px) {
-/* mobile */
-.icon{
-  height: 90px;
-}
+  /* mobile */
+  .icon {
+    height: 90px;
+  }
 }
 
 #icon {
@@ -129,32 +140,6 @@
   background-repeat: no-repeat;
   background-size: 100% 70%;
   background-position: center;
-}
-
-.favorite-btn {
-  display: flex;
-  justify-content: center;
-  font-family: sans-serif;
-  height: 50px;
-}
-
-#favorite-btn {
-  color: azure;
-  background-color: black;
-  width: 200px;
-  border-radius: 10px;
-}
-#favorite-btn:hover {
-  font-weight: bold;
-  color: yellow;
-  cursor: grab;
-}
-
-@media (max-width: 700px) {
-  /*  mobile */
-  .favorite-btn button {
-    font-size: 20px;
-  }
 }
 
 .five-Days {
@@ -206,7 +191,6 @@
   display: flex;
   justify-content: center;
   border: 2px solid black;
-  font-family: sans-serif;
   margin-left: 20px;
 }
 

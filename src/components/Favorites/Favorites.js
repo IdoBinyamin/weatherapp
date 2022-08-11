@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCityWeatherProvider } from '../City.Provider';
+import { useCityWeatherProvider } from '../../City.Provider';
 import './Favorites.css';
 
 export default function Favorites(props) {
@@ -20,7 +20,7 @@ export default function Favorites(props) {
     updateAllWeekDays(week);
     updateCurrCondition(skyCondition);
 
-    navigate('/');
+    navigate('/weatherapp');
   };
   return (
     <div className="favorite-page">
@@ -35,8 +35,9 @@ export default function Favorites(props) {
                   getFavoriteDetails(c.name, c.temp, c.week, c.skyCondition);
                 }}
               >
+                <p style={{height:'2px', weight:'2px', marginBottom:'0px'}}>❤️</p>
                 <p>{c.name}</p>
-                <p>{c.temp}</p>
+                <p>{c.temp}&#8451;</p>
               </div>
             );
           })
