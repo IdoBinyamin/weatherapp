@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react';
 import { useCityWeatherProvider } from './City.Provider';
 
 function App() {
-  // const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
-  // const key = '9SEodDo9kGMypK9IsB8DjnvhesKD5IRz';
+  
   const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
 
   const {
@@ -68,8 +67,7 @@ function App() {
       const data = await response.json();
       updateSearchedCityWeather(data[0].Temperature.Metric.Value);
       updateCurrCondition(data[0].WeatherIcon);
-      // console.log(data[0].IsDayTime);
-      // console.log(searchedCityWeather);
+     
       updateIsExsist(
         favoritesCities.filter((c) => {
           return c.name === cityToSearch;
