@@ -24,7 +24,8 @@ export default function HomePage(props) {
 
   return (
     <div className="main-page">
-      <SearchCity searchCity={catchCity}  setIsExsist={updateIsExsist}/>
+      <SearchCity searchCity={catchCity} setIsExsist={updateIsExsist} />
+      <p id='error'>{props.error}</p>
       <ShowWeather isExsist={isExsist} setIsExsist={updateIsExsist} />
     </div>
   );

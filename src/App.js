@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const { updateCityData } = useWeatherProvider();
   const [error, setError] = useState(null);
-  const key = 'WH3tbmkFRfOPa7P2BLOiyXHynDramr4G';
+  const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
 
   useEffect(() => {
     getCityIdInApi('tel aviv');
