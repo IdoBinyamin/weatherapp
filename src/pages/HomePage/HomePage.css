@@ -1,0 +1,17 @@
+.main-page {
+  display: inline;
+  justify-content: center;
+  font-family: sans-serif;
+}
+@media (max-width: 700px) {
+  /*  mobile */
+  /* .main-page {
+    } */
+}
+
+.write-to-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}

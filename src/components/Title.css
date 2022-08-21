@@ -6,16 +6,17 @@
   border-bottom: 2px solid black;
   font-size: 14px;
   background-color: black;
-  font-family: sans-serif;
 }
-
 
 .headline-title h1 {
   color: azure;
-}
-.headline-title h1:hover {
-  color: yellow;
   cursor: grab;
+}
+.headline-title #fav:hover {
+  color: yellow;
+}
+.headline-title #hom:hover {
+  color:orangered;
 }
 
 @media (min-width: 700px) {
@@ -31,5 +32,4 @@
   .headline-title {
     justify-content: space-around;
   }
-
 }

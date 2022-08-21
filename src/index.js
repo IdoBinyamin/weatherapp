@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import CityWeatherProvider from './City.Provider';
+import WeatherProvider from './Provider/WeatherProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CityWeatherProvider>
+    <WeatherProvider>
       <App />
-    </CityWeatherProvider>
+    </WeatherProvider>
   </React.StrictMode>
 );
