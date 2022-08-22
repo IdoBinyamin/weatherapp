@@ -87,7 +87,7 @@ function App() {
       getCityWeatherInApi(data[0].Key);
       cityDataBuild.name = data[0].LocalizedName;
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 
