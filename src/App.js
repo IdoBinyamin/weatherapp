@@ -2,14 +2,14 @@ import './App.css';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
-import Title from './components/Title';
+import Title from './components/Title/Title';
 import { useWeatherProvider } from './Provider/WeatherProvider';
 import { useEffect, useState } from 'react';
 
 function App() {
   const { updateCityData } = useWeatherProvider();
   const [error, setError] = useState(null);
-  const key = '4k4wWlScDkI28jEhjxoniSZCvJgYkbZW';
+  const key = 'GPuKQJeTclafwDh4L3wNyve3YqOP2sca';
 
   useEffect(() => {
     getCityIdInApi('tel aviv');
@@ -20,8 +20,8 @@ function App() {
     weather: '',
     icon: '',
     weekly: '',
+    isFavorite: false,
   };
- 
 
   const dateDataHandler = (daysOfTheWeek) => {
     const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -91,6 +91,11 @@ function App() {
     }
   };
 
+  const [isExsist, setIsExsist] = useState(false);
+  const updateIsExsist = (stage) => {
+    setIsExsist(stage);
+  };
+
   return (
     <div className="App">
       <HashRouter>
@@ -98,11 +103,23 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<HomePage getCityIdInApi={getCityIdInApi} error={error}  />}
+            element={
+              <HomePage
+                getCityIdInApi={getCityIdInApi}
+                error={error}
+                isExsist={isExsist}
+                updateIsExsist={updateIsExsist}
+              />
+            }
           />
           <Route
             path="/favorites"
-            element={<FavoritesPage getCityIdInApi={getCityIdInApi}/>}
+            element={
+              <FavoritesPage
+                getCityIdInApi={getCityIdInApi}
+                updateIsExsist={updateIsExsist}
+              />
+            }
           />
         </Routes>
       </HashRouter>

@@ -11,7 +11,7 @@ export default function Title() {
           navigate('/');
         }}
       >
-       <i class="fa fa-home"></i> Home
+       <i className="fa fa-home"></i> Home
       </h1>
       <h1 id='fav'
         onClick={() => {

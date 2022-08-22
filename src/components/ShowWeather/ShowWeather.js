@@ -1,27 +1,33 @@
 import React from 'react';
-import { useWeatherProvider } from '../Provider/WeatherProvider';
+import { useWeatherProvider } from '../../Provider/WeatherProvider';
 import './ShowWeather.css';
 export default function ShowWeather(props) {
-  const { cityData, updateFavoritesCities, favoritesCities } =
-    useWeatherProvider();
+  const {
+    cityData,
+    updateFavoritesCities,
+    favoritesCities,
+    removeFromFavoritesCities,
+  } = useWeatherProvider();
 
   const handleAddFavoriteBtn = () => {
     let city = {
       name: '',
       temp: '',
+      isFavorite: false,
     };
     let exsist = favoritesCities.filter((c, i) => {
       return c.name === cityData.name;
     });
     if (exsist.length > 0) {
-      props.setIsExsist(true);
-      alert('This city is allready favorite!');
+      props.setIsExsist(false);
+      removeFromFavoritesCities(exsist[0]);
       return;
     } else {
       city.name = cityData.name;
       city.temp = cityData.weather;
-      updateFavoritesCities(city);
+      city.isFavorite = true;
       props.setIsExsist(true);
+      updateFavoritesCities(city);
     }
   };
   return (

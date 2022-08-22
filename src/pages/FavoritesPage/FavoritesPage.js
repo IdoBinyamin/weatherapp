@@ -17,6 +17,7 @@ export default function FavoritesPage(props) {
                 className="favorite-city"
                 onClick={() => {
                   props.getCityIdInApi(c.name);
+                  props.updateIsExsist(true);
                   navigate('/');
                 }}
               >
