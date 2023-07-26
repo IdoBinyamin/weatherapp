@@ -4,9 +4,6 @@ WeatherApp is an application that allows users to search for a place anywhere in
 # Demo
 Check out the live demo of WeatherApp: WeatherApp Demo
 
-# Screenshots
-[Include any relevant screenshots here to showcase your application's interface.]
-
 # Technologies Used
 * React.js
 * css
