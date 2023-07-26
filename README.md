@@ -9,8 +9,8 @@ Check out the live demo of WeatherApp: WeatherApp Demo
 * css
 * React Router 
 
-# Install WeatherApp locally
- follow these steps:
+# Installation
+To run WeatherApp locally, follow these steps:
 
 1. Clone the repository: git clone https://github.com/idobinyamin/weatherapp.git
 2. Navigate to the project directory: cd weatherapp
