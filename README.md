@@ -6,7 +6,6 @@ Check out the live demo of WeatherApp: WeatherApp Demo
 
 # Technologies Used
 * React.js
-* CSS
 * React Router 
 
 # Installation
