@@ -9,7 +9,8 @@ Check out the live demo of WeatherApp: WeatherApp Demo
 
 # Technologies Used
 * React.js
-* React Router (for navigation)
+* css
+* React Router 
 
 # Install WeatherApp locally
  follow these steps:
